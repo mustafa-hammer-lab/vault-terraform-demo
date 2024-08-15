@@ -27,7 +27,7 @@ variable "vault_clusters" {
     #   cidr_block = "172.25.16.0/24"
     # },
     "prod" = {
-      tier       = "plus_large"
+      tier       = "plus_small"
       cidr_block = "172.25.17.0/24"
     }
   }

@@ -23,6 +23,8 @@ resource "hcp_vault_cluster" "hcp_vault_cluster" {
   hvn_id     = hcp_hvn.hvn[each.key].hvn_id
   tier       = each.value.tier
 
+  public_endpoint = true
+
   lifecycle {
     prevent_destroy = false
   }
