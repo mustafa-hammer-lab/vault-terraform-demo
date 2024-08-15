@@ -30,4 +30,21 @@ resource "hcp_vault_cluster" "hcp_vault_cluster" {
   }
 }
 
+resource "hcp_vault_cluster_admin_token" "admin_token" {
+  for_each   = var.vault_clusters
+  cluster_id = hcp_vault_cluster.hcp_vault_cluster[each.key].cluster_id
+}
 
+output "tokens" {
+  description = "The admin tokens for Vault"
+  value = {
+    for cluster, _ in var.vault_clusters : cluster => nonsensitive(hcp_vault_cluster_admin_token.admin_token[cluster].token)
+  }
+}
+
+output "vault_public_endpoints" {
+  description = "The public endpoints for dev and prod Vault clusters"
+  value = {
+    for cluster, _ in var.vault_clusters : cluster => hcp_vault_cluster.hcp_vault_cluster[cluster].public_endpoint
+  }
+}
