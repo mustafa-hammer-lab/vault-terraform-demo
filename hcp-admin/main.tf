@@ -1,16 +1,14 @@
 locals {
 }
 
-resource "hcp_project" "projects" {
-  for_each = var.vault_clusters
-
-  name        = each.key
-  description = "This is a project for: ${each.key}"
+data "hcp_project" "project" {
+  project = "rts-mustafa-lab"
 }
 
 resource "hcp_hvn" "hvn" {
   for_each = var.vault_clusters
 
+  project_id     = data.hcp_project.project.resource_id
   hvn_id         = "${each.key}-vault-demo"
   cloud_provider = "aws"
   region         = "us-west-2"
@@ -25,7 +23,7 @@ resource "hcp_vault_cluster" "hcp_vault_cluster" {
   tier       = each.value.tier
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = false
   }
 }
 
