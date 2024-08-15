@@ -2,7 +2,7 @@ locals {
 }
 
 data "hcp_project" "project" {
-  project = "rts-mustafa-lab"
+  project = "lab-project"
 }
 
 resource "hcp_hvn" "hvn" {
