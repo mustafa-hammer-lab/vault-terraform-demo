@@ -2,7 +2,7 @@ locals {
 }
 
 data "hcp_project" "project" {
-  project = "lab-project"
+  project = "f1e1f94a-ee7d-4459-bcf3-777c402d81ab"
 }
 
 resource "hcp_hvn" "hvn" {
