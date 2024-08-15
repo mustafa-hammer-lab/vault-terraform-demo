@@ -24,11 +24,11 @@ variable "vault_clusters" {
   default = {
     "dev" = {
       tier       = "plus_medium"
-      cidr_block = "172.25.16.0/20"
+      cidr_block = "172.25.16.0/24"
     },
     "prod" = {
       tier       = "plus_large"
-      cidr_block = "172.25.16.1/20"
+      cidr_block = "172.25.17.0/24"
     }
   }
 }
