@@ -25,7 +25,7 @@ resource "hcp_vault_cluster" "hcp_vault_cluster" {
   tier       = each.value.tier
 
   lifecycle {
-    prevent_destroy = each.value.prevent_destroy
+    prevent_destroy = true
   }
 }
 
