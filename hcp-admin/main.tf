@@ -21,11 +21,11 @@ resource "hcp_vault_cluster" "hcp_vault_cluster" {
   for_each = var.vault_clusters
 
   cluster_id = "${each.key}-vault-cluster"
-  hvn_id     = hcp_hvn.example.hvn_id
+  hvn_id     = hcp_hvn.hvn[each.key].hvn_id
   tier       = each.value.tier
 
   lifecycle {
-    prevent_destroy = true
+    prevent_destroy = each.value.prevent_destroy
   }
 }
 

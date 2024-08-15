@@ -18,17 +18,20 @@ variable "team" {
 variable "vault_clusters" {
   description = "Map of Vault clusters with relevant details."
   type = map(object({
-    tier       = string
-    cidr_block = string
+    tier            = string
+    cidr_block      = string
+    prevent_destroy = bool
   }))
   default = {
     "dev" = {
-      tier       = "plus_medium"
-      cidr_block = "172.25.16.0/20"
+      tier            = "plus_medium"
+      cidr_block      = "172.25.16.0/20"
+      prevent_destroy = false
     },
     "prod" = {
-      tier       = "plus_large"
-      cidr_block = "172.25.16.1/20"
+      tier            = "plus_large"
+      cidr_block      = "172.25.16.1/20"
+      prevent_destroy = true
     }
   }
 }
