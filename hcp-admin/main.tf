@@ -45,6 +45,6 @@ output "tokens" {
 output "vault_public_endpoints" {
   description = "The public endpoints for dev and prod Vault clusters"
   value = {
-    for cluster, _ in var.vault_clusters : cluster => hcp_vault_cluster.hcp_vault_cluster[cluster].public_endpoint
+    for cluster, _ in var.vault_clusters : cluster => hcp_vault_cluster.hcp_vault_cluster[cluster].vault_public_endpoint_url
   }
 }
