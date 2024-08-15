@@ -22,10 +22,10 @@ variable "vault_clusters" {
     cidr_block = string
   }))
   default = {
-    # "dev" = {
-    #   tier       = "plus_medium"
-    #   cidr_block = "172.25.16.0/24"
-    # },
+    "dev" = {
+      tier       = "plus_medium"
+      cidr_block = "172.25.16.0/24"
+    },
     "prod" = {
       tier       = "plus_small"
       cidr_block = "172.25.17.0/24"
