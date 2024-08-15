@@ -18,6 +18,7 @@ resource "hcp_hvn" "hvn" {
 resource "hcp_vault_cluster" "hcp_vault_cluster" {
   for_each = var.vault_clusters
 
+  project_id = data.hcp_project.project.resource_id
   cluster_id = "${each.key}-vault-cluster"
   hvn_id     = hcp_hvn.hvn[each.key].hvn_id
   tier       = each.value.tier
