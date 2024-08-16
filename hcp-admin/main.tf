@@ -67,7 +67,7 @@ resource "tfe_variable_set" "vault_variable_set" {
   organization = data.tfe_organization.org.name
 }
 
-resource "tfe_project_variable_set" "test" {
+resource "tfe_project_variable_set" "vault_project_variable_set" {
   for_each = var.vault_clusters
 
   project_id      = tfe_project.vault_project[each.key].id
@@ -81,7 +81,7 @@ resource "tfe_variable" "vault_url" {
   value           = hcp_vault_cluster.hcp_vault_cluster[each.key].vault_public_endpoint_url
   category        = "env"
   sensitive       = true
-  variable_set_id = tfe_variable_set.test.id
+  variable_set_id = tfe_variable_set.vault_variable_set[each.key].id
 }
 
 resource "tfe_variable" "vault_token" {
@@ -91,5 +91,5 @@ resource "tfe_variable" "vault_token" {
   value           = hcp_vault_cluster_admin_token.admin_token[each.key].token
   category        = "env"
   sensitive       = true
-  variable_set_id = tfe_variable_set.test.id
+  variable_set_id = tfe_variable_set.vault_variable_set[each.key].id
 }
