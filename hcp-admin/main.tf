@@ -48,3 +48,48 @@ output "vault_public_endpoints" {
     for cluster, _ in var.vault_clusters : cluster => hcp_vault_cluster.hcp_vault_cluster[cluster].vault_public_endpoint_url
   }
 }
+
+data "tfe_organization" "org" {
+  name = "mustafa-lab"
+}
+
+resource "tfe_project" "vault_project" {
+  for_each = var.vault_clusters
+
+  organization = data.tfe_organization.org.name
+  name         = "${each.key}-vault"
+}
+
+resource "tfe_variable_set" "vault_variable_set" {
+  for_each = var.vault_clusters
+
+  name         = "${each.key}-vault-tokens"
+  organization = data.tfe_organization.org.name
+}
+
+resource "tfe_project_variable_set" "test" {
+  for_each = var.vault_clusters
+
+  project_id      = tfe_project.vault_project[each.key].id
+  variable_set_id = tfe_variable_set.vault_variable_set[each.key].id
+}
+
+resource "tfe_variable" "vault_url" {
+  for_each = var.vault_clusters
+
+  key             = "VAULT_ADDR"
+  value           = hcp_vault_cluster.hcp_vault_cluster[each.key].vault_public_endpoint_url
+  category        = "env"
+  sensitive       = true
+  variable_set_id = tfe_variable_set.test.id
+}
+
+resource "tfe_variable" "vault_token" {
+  for_each = var.vault_clusters
+
+  key             = "VAULT_TOKEN"
+  value           = hcp_vault_cluster_admin_token.admin_token[each.key].token
+  category        = "env"
+  sensitive       = true
+  variable_set_id = tfe_variable_set.test.id
+}
