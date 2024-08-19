@@ -53,7 +53,7 @@ data "tfe_organization" "org" {
   name = "mustafa-lab"
 }
 
-data "tfe_project" "org" {
+data "tfe_project" "project" {
   name         = "Cigna Demo"
   organization = data.tfe_organization.org.name
 }
@@ -78,13 +78,6 @@ resource "tfe_project_variable_set" "vault_project_variable_set" {
   project_id      = tfe_project.vault_project[each.key].id
   variable_set_id = tfe_variable_set.vault_variable_set[each.key].id
 }
-
-# resource "tfe_project_variable_set" "vault_project_variable_set" {
-#   for_each = var.vault_clusters
-
-#   project_id      = tfe_project.vault_project[each.key].id
-#   variable_set_id = tfe_variable_set.vault_variable_set[each.key].id
-# }
 
 resource "tfe_variable" "vault_url" {
   for_each = var.vault_clusters
