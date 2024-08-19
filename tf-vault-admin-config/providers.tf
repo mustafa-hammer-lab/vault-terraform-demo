@@ -1,10 +1,15 @@
 terraform {
   required_version = "~> 1.6"
-
+  cloud {
+    organization = "mustafa-lab"
+    workspaces {
+      tags = ["tf-vault-admin-config"]
+    }
+  }
   required_providers {
     vault = {
       source  = "hashicorp/vault"
-      version = ">= 3.0.0"
+      version = ">= 4.4.0"
     }
   }
 }
@@ -16,6 +21,6 @@ provider "hcp" {
 
 # Configure the Vault provider
 provider "vault" {
-  address = data.hcp_vault_cluster.example.public_endpoint
-  token   = hcp_vault_cluster_admin_token.example.token
+  address = var.vault_addr
+  token   = var.vault_token
 }
