@@ -30,5 +30,9 @@ variable "vault_clusters" {
       tier       = "plus_small"
       cidr_block = "172.25.17.0/24"
     }
+    "test" = {
+      tier       = "plus_small"
+      cidr_block = "172.25.18.0/24"
+    }
   }
 }
