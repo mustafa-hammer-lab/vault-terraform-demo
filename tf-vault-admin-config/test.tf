@@ -26,10 +26,12 @@
 # }
 
 # module "test" {
-#   source       = "../../terraform-vault-manageconsumers"
-#   owner_email  = "test"
-#   namespace    = "all_consumers"
-#   team_name    = "lala"
-#   github_token = "dsafkljhdas"
-#   charge_back  = "dafkj"
+#   source  = "app.terraform.io/mustafa-lab/manageconsumers/vault"
+#   version = "1.0.0"
+
+#   owner_email = "test"
+#   namespace   = "all_consumers"
+#   #   team_name    = "lala"
+#   #   github_token = "dsafkljhdas"
+#   #   charge_back  = "dafkj"
 # }

@@ -1,6 +1,6 @@
 #!/bin/bash
-env="dev"
-team_name="demo123"
+env="prod"
+team_name="demothingdasij"
 
 namespace="all_consumers"
 github_token="adskjladsf"
@@ -12,11 +12,11 @@ TFC_WORKSPACE=${env}-${team_name}
 ORG_NAME="mustafa-lab"
 MODULE_ID="nocode-SypBAATpRaVpMvgv"
 
-#DEV
-PROJECT_ID="prj-1KLUcsmXaKU9t8LF"
-
-#PROD
-# PROJECT_ID="prj-j3DgBDScxErxtiXn"
+if [ "$env" == "dev" ]; then
+    PROJECT_ID="prj-1KLUcsmXaKU9t8LF"
+else
+    PROJECT_ID="prj-j3DgBDScxErxtiXn"
+fi
 
 # Workspace parameters
 EXECUTION_MODE="remote"  # or "agent"
