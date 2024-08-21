@@ -23,16 +23,16 @@ variable "vault_clusters" {
   }))
   default = {
     "dev" = {
-      tier       = "plus_medium"
+      tier       = "plus_small"
       cidr_block = "172.25.16.0/24"
     },
-    "prod" = {
-      tier       = "plus_small"
-      cidr_block = "172.25.17.0/24"
-    }
-    "test" = {
-      tier       = "plus_small"
-      cidr_block = "172.25.18.0/24"
-    }
+    # "prod" = {
+    #   tier       = "plus_small"
+    #   cidr_block = "172.25.17.0/24"
+    # }
+    # "test" = {
+    #   tier       = "plus_small"
+    #   cidr_block = "172.25.18.0/24"
+    # }
   }
 }
